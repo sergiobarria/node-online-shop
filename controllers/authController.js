@@ -1,10 +1,13 @@
 const getSignup = (req, res, next) => {
-  res.render('customer/auth/signup')
+  res.render('customer/auth/signup');
 };
+
+const signup = (req, res, next) => {};
 
 const getLogin = (req, res, next) => {};
 
 module.exports = {
   getSignup,
   getLogin,
+  signup,
 };

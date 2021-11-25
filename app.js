@@ -3,6 +3,9 @@ const path = require('path');
 const express = require('express');
 const colors = require('colors');
 
+// Import database connection
+const db = require('./db/database');
+
 // Import Routes
 const authRoutes = require('./routes/authRoutes');
 
@@ -15,5 +18,15 @@ app.use(express.static('public'));
 
 app.use(authRoutes);
 
-const PORT = 3000;
-app.listen(PORT, console.log(`App listening on PORT ${PORT}`.blue.bold));
+// Connect to database && start server
+// const PORT = 3000;
+
+db.connectToDatabase()
+  .then(() => {
+    app.listen(3000, console.log(`App listening on PORT 3000`.green.bold));
+    console.log(`MongoDB Connected`.cyan.underline.bold);
+  })
+  .catch((err) => {
+    console.error(`Failed to connect to Database`.red);
+    console.error(err);
+  });
