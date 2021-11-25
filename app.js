@@ -15,15 +15,19 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false }));
 
+// Use Routes
 app.use(authRoutes);
 
 // Connect to database && start server
 // const PORT = 3000;
-
 db.connectToDatabase()
   .then(() => {
-    app.listen(3000, console.log(`App listening on PORT 3000`.green.bold));
+    app.listen(
+      3000,
+      console.log(`App listening on PORT 3000`.yellow.underline.bold)
+    );
     console.log(`MongoDB Connected`.cyan.underline.bold);
   })
   .catch((err) => {
